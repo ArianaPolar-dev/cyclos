@@ -48,6 +48,15 @@
         // Referencia al contador de visitantes
         const visitorsRef = ref(database, 'visitors');
 
+         // Sonido del reloj
+        const relojAudio = new Audio('reloj.mp3');
+        relojAudio.loop = true;  // Reproducir en bucle
+
+        // Esperar la interacción del usuario para reproducir el sonido
+        document.body.addEventListener('click', () => {
+            relojAudio.play();  // Iniciar el sonido cuando el usuario haga clic
+        });
+
         // Mostrar el número de visitantes en tiempo real
         onValue(visitorsRef, (snapshot) => {
             const count = snapshot.val() || 0;
