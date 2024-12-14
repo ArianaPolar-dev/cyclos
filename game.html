@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Juego</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: black;
+            color: white;
+            font-family: 'Press Start 2P', cursive;
+            text-align: center;
+        }
+        #container {
+            max-width: 80%;
+        }
+        button {
+            background-color: black;
+            border: 1px solid white;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: white;
+            color: black;
+        }
+        audio {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            z-index: -1;
+        }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"></script>
+    <script>
+        // TODO: Replace with your Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBRzJuzLM3j4QWlrmTaAoN_IX0xRwbme84",
+  authDomain: "cyclos-a3aab.firebaseapp.com",
+  databaseURL: "https://cyclos-a3aab-default-rtdb.firebaseio.com",
+  projectId: "cyclos-a3aab",
+  storageBucket: "cyclos-a3aab.firebasestorage.app",
+  messagingSenderId: "714774155829",
+  appId: "1:714774155829:web:8211d3d34c1d23b245d77c",
+  measurementId: "G-3KJGQ3HM9L"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const database = firebase.database(app);
+
+        // Update visitor count
+        const visitorsRef = firebase.database().ref('visitors');
+        visitorsRef.transaction(currentCount => {
+            return (currentCount || 0) + 1;
+        });
+    </script>
+</head>
+<body>
+    <audio autoplay loop>
+        <source src="reloj.mp3" type="audio/mpeg">
+        Tu navegador no soporta el audio.
+    </audio>
+    <div id="container">
+        <p>Llegaste. Ahora eres parte del juego. Descubre la verdad, espera el siguiente desafío.</p>
+        <button id="openDoor">Abrir la puerta</button>
+    </div>
+
+    <script>
+        document.getElementById('openDoor').addEventListener('click', () => {
+            window.location.href = "intro.html";
+        });
+    </script>
+</body>
+</html>
