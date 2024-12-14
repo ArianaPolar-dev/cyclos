@@ -67,10 +67,20 @@
     </script>
 </head>
 <body>
-    <audio autoplay loop>
-        <source src="reloj.mp3" type="audio/mpeg">
-        Tu navegador no soporta el audio.
-    </audio>
+    <audio id="clock-audio" loop>
+    <source src="reloj.mp3" type="audio/mpeg">
+    Tu navegador no soporta el elemento audio.
+</audio>
+<script>
+    // Reproducir audio tras interacción del usuario
+    document.addEventListener('click', () => {
+        const audio = document.getElementById('clock-audio');
+        if (audio.paused) {
+            audio.play().catch(err => console.error('Error al reproducir el audio:', err));
+        }
+    });
+</script>
+
     <div id="container">
         <p>Llegaste. Ahora eres parte del juego. Descubre la verdad, espera el siguiente desafío.</p>
         <button id="openDoor">Abrir la puerta</button>
